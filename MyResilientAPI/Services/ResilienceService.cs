@@ -17,7 +17,10 @@ namespace MyResilientAPI.Services
 			var pipeline = _pipelineProvider.GetPipeline("my-strategy");
 			return await pipeline.ExecuteAsync(async token =>
 			{
-				return await _client.GetFromJsonAsync<string>("https://localhost:7181/api/fault/timeout", token);
+				var response = await _client.GetAsync(
+					"https://localhost:7181/api/fault/unstable",
+					token);
+				return await response.Content.ReadAsStringAsync(token);
 			}, cancellationToken);
 		}
 	}

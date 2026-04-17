@@ -2,6 +2,7 @@ using MyResilientAPI.Services;
 using Polly;
 using Polly.Retry;
 using Polly.Timeout;
+using Polly.CircuitBreaker;
 
 namespace MyResilientAPI;
 
@@ -26,7 +27,12 @@ public class Program
                 })
                 .AddTimeout(new TimeoutStrategyOptions
                 {
-                    Timeout = new TimeSpan(5000)
+                    Timeout = TimeSpan.FromSeconds(5)
+                })
+                .AddCircuitBreaker(new CircuitBreakerStrategyOptions
+                {
+                    FailureRatio = 0.5,
+                    BreakDuration = TimeSpan.FromSeconds(5)
                 });
         });
 
