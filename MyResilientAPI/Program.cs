@@ -28,7 +28,7 @@ public class Program
                 })
                 .AddTimeout(new TimeoutStrategyOptions
                 {
-                    Timeout = TimeSpan.FromSeconds(5)
+                    Timeout = TimeSpan.FromSeconds(30)
                 })
                 .AddCircuitBreaker(new CircuitBreakerStrategyOptions
                 {
