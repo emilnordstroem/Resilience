@@ -23,7 +23,8 @@ public class Program
                 .AddRetry(new RetryStrategyOptions
                 {
                     MaxRetryAttempts = 3,
-                    Delay = new TimeSpan(2000)
+                    Delay = new TimeSpan(2000),
+                    BackoffType = DelayBackoffType.Constant // Linear, Constant, Exponential 
                 })
                 .AddTimeout(new TimeoutStrategyOptions
                 {
